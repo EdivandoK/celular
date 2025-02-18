@@ -1,31 +1,29 @@
 export const revalidate = 0;
+
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { sql } from "@vercel/postgres";
 
-
-export default async function list() {
- 
-    const { rows }= await sql`SELECT * FROM students`
+export default async function List() {
+    const { rows } = await sql`SELECT * FROM celular`;
 
     return (
         <div className="rounded-md border">
             <Table>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-[50%]">Nome</TableHead>
-                        <TableHead>E-mail</TableHead>
+                        <TableHead className="w-[50%]">Name</TableHead>
+                        <TableHead>Brand</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {rows.map((student) => (
-                        <TableRow key={student.id}>
-                            <TableCell className="font-medium">{student.name}</TableCell>
-                            <TableCell>{student.email}</TableCell>
+                    {rows.map((celular) => (
+                        <TableRow key={celular.id}>
+                            <TableCell className="font-medium">{celular.name}</TableCell>
+                            <TableCell>{celular.brand}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
         </div>
-    )
-
+    );
 }
